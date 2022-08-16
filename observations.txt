@@ -1,0 +1,57 @@
+# I have made a game named as "CONNECT 4".
+
+# Game Rules & Description:
+1. It is a game derived from tic-tac-toe.
+2. Two players play this game, each gets a chance to play a move alternatively.
+3. The First Player who Connects balls of same color(that color which is assigned to him) either horizontally or vertically
+   or diagonally wins.
+4. A player has to click on the column (anywhere in that column) using mouse, where he wants to play his move. 
+5. It is different from tic-tac-toe as in Connect 4, on whichever Column the player clicks,
+   the ball drops into the last empty circle of that column only.
+6. When this game is played in reality, each player drops a coloured coin (as ball here) into the column grid of its board.
+   So, I have also made like this that when you click on any column, your ball(like coin) gets into the last empty circle of that column.
+7. Though this game seems like tic-tac-toe, it is very different from tic-tac-toe as we are only allowed to take a move on last empty circle of a column.
+8. User have to close the screen using cross button on top right after the "game over" text appears.
+   and user should not again click on widget after game overs, as I have not deleted/hide the widget,
+   because if I would hide the widget immediately after someone wins, it would be difficult to figure out who won at which stage of game due to which move.
+   So, user should himself close the game after game ends.
+10. It is a multi-player game, so two people can play it easily. I have not implemented computer to be the 2nd player.
+
+# Abstractions:
+1. An abstract class "Object" from which I inherited appropriate sub-classes.
+   Object class had the handle function along with two abstract functions : "fill" and "end".
+   I have commented the uses of these functions in the code.
+2. I used a global varible "chance" that ensured that players play alternatively.
+3. A class "Ball" which contains all the informations about a ball.
+   It has two private varibles to store its color and top=left x coordinate.
+   x-coordinate was needed to be stored as the balls were coloured on the basis of column on which player clicks.
+4. A class "Message" that was used to display text of player's colours.
+5. A class "Grid" that created the outer grid of board.
+   Though I have to leave abstract function like fill & end empty in this class, still I inherited from Object class because,
+   the Dimensions (x,y,w,h) were finely constructed in Object so I do not have to implement these again and again.
+   Also, some of these were inter-linked in Ball class with Board class, so it was fine.
+6. A class "Board" : it was the main class that stored pointer to balls as 2-D arrays.
+   It also controlled the functionality of selecting desired ball to be colored, when a user clicks and fill it
+   As this class held all the balls so it was convenient to perform operations through this class.
+   The operations of checking whether a player has won or game has ended was also implemented here.
+
+# Observations/Remarks:
+1. We can use handle event function, which is pre-defined in class Fl::widget for processing live events.
+   This function plays a key-role while processing interaction between program and user through processing events that take place.
+2. There are various event processing functions in fltk like this for mouse/keyboard or any other input and performing action in the program based on the input received from user's end.
+3. All the classes inherited from an abstract class need to over-ride its abstract function somehow other-wise it shows an error.
+4. We can also display text of various font type, size etc as a widget.
+5. Initially before this final code, I tried using class of columns as an Abstractions
+   because then it would be easy to check whether user has clicked on this widget of a particular column 
+   as balls were to filled column-wise.
+   But, in that abstraction the data of other columns was inaccessible and we needed it to check if player has won 
+   by connecting 4 balls horizontally.
+   So, I arrived to use a 2-D array of balls inside a class Board as an abstraction for this game.
+6. There is a high chance of segmentation faults happening. It happened a lot of time to me while programming this game.
+   So, we should be careful about this and examine or resolve this error carefully if it appears.
+7. I was not able to close the window automatically after the game ends.
+   So, I Expect user to close window after "game over" appears on the screen otherwise weird things might happen.
+
+--Name : Atishay Jain
+--Roll Number: 210050026
+  
